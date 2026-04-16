@@ -1,7 +1,12 @@
 import "./App.css";
+import MainPage from "@/pages/MainPage";
 
 function App() {
-  return <div>테스트</div>;
+  return (
+    <>
+      <MainPage />
+    </>
+  );
 }
 
 export default App;
