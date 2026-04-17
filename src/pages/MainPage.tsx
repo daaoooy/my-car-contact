@@ -1,71 +1,46 @@
-import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
-import { cn } from "@/lib/utils";
-import CasperDongGuImage from "@/assets/casper-donggu-default.png";
-import { Button } from "@/components/shadcn/button";
-import ContactButtons from "@/components/feature/ContactButtons";
+import { AnimatePresence } from "framer-motion";
+
+import { useContact } from "@/hooks/useContact";
+import { useTheme } from "@/hooks/useTheme";
+import { useAnimation } from "@/hooks/useAnimation";
+
+import MainHomeView from "@/components/MainHomeView";
+import MessageInputView from "@/components/MessageInputView";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const MainPage = () => {
-  const [start, setStart] = useState(false);
-  const [shake, setShake] = useState(false);
-  const [dark, setDark] = useState(false);
-
-  const toggleTheme = () => {
-    setDark((prev) => {
-      const next = !prev;
-      document.documentElement.classList.toggle("dark", next);
-      return next;
-    });
-  };
-
-  useEffect(() => {
-    if (!start) return;
-
-    const interval = setInterval(() => {
-      setShake(true);
-      setTimeout(() => setShake(false), 80);
-    }, 140);
-
-    return () => clearInterval(interval);
-  }, [start]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setStart(true);
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const { start, shake } = useAnimation();
+  const { dark, toggleTheme } = useTheme();
+  const {
+    isMessaging,
+    setIsMessaging,
+    message,
+    setMessage,
+    handleCall,
+    handleSendMessage,
+  } = useContact();
 
   return (
-    <div className="flex flex-col gap-4 h-screen items-center justify-center overflow-hidden">
-      <Button
-        onClick={toggleTheme}
-        className="absolute top-2 right-2 transition-all duration-300"
-      >
-        {dark ? <Sun /> : <Moon />}
-      </Button>
+    <div className="flex flex-col h-screen items-center justify-center overflow-hidden p-6 relative">
+      <ThemeToggle dark={dark} toggleTheme={toggleTheme} />
 
-      <h2>차주에게 연락이 필요하신가요?</h2>
-
-      <p className="text-sm">
-        원하는 방법을 선택해주시면 <br /> 바로 차주와 연락이 가능합니다.
-      </p>
-
-      <div
-        className={cn(
-          "transition-all duration-7000 ease-linear",
-          start
-            ? "translate-x-0 translate-y-0 scale-100"
-            : "translate-x-160 -translate-y-140 scale-10",
+      <AnimatePresence mode="wait">
+        {!isMessaging ? (
+          <MainHomeView
+            start={start}
+            shake={shake}
+            onCall={handleCall}
+            onShowMessage={() => setIsMessaging(true)}
+          />
+        ) : (
+          <MessageInputView
+            message={message}
+            setMessage={setMessage}
+            onBack={() => setIsMessaging(false)}
+            onSend={handleSendMessage}
+          />
         )}
-      >
-        <img
-          src={CasperDongGuImage}
-          className={cn("w-70 h-70 scale-100", shake ? "translate-y-px" : "")}
-        />
-      </div>
-      <ContactButtons />
+      </AnimatePresence>
     </div>
   );
 };
