@@ -21,11 +21,12 @@ const MainPage = () => {
   } = useContact();
 
   return (
-    <div className="flex flex-col h-screen items-center justify-between p-2 relative overflow-hidden">
-      <div className="h-10 w-full flex justify-start pb-7 md:pb-3">
+    <div className="flex flex-col h-screen items-center justify-center p-2 relative overflow-hidden">
+      <div className="h-10 w-full flex justify-start p-1.5 shrink-0">
         <ThemeToggle dark={dark} toggleTheme={toggleTheme} />
       </div>
 
+    <div className="flex-1 flex items-center justify-center">
       <AnimatePresence mode="wait">
         {!isMessaging ? (
           <MainHomeView
@@ -43,6 +44,7 @@ const MainPage = () => {
           />
         )}
       </AnimatePresence>
+      </div>
     </div>
   );
 };
