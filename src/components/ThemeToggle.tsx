@@ -35,6 +35,7 @@ const ThemeToggle = ({ dark, toggleTheme }: ThemeToggleProps) => {
 
         <motion.div
           className="z-10 w-6 h-6 bg-white rounded-full shadow-lg flex items-center justify-center"
+          initial={false}
           animate={{ x: dark ? 30 : 0 }}
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
         >
