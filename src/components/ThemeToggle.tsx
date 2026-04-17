@@ -9,14 +9,11 @@ interface ThemeToggleProps {
 
 const ThemeToggle = ({ dark, toggleTheme }: ThemeToggleProps) => {
   return (
-    <div
-      className="absolute top-4 right-4 cursor-pointer select-none"
-      onClick={toggleTheme}
-    >
+    <div className="cursor-pointer select-none" onClick={toggleTheme}>
       <div
         className={cn(
           "relative w-16 h-8 flex items-center rounded-full px-1.5 transition-colors duration-500",
-          dark ? "bg-gray-800" : "bg-gray-400",
+          dark ? "bg-gray-800" : "bg-gray-300",
         )}
       >
         <div className="absolute inset-0 flex items-center justify-between px-2 text-white/50">
@@ -38,7 +35,7 @@ const ThemeToggle = ({ dark, toggleTheme }: ThemeToggleProps) => {
 
         <motion.div
           className="z-10 w-6 h-6 bg-white rounded-full shadow-lg flex items-center justify-center"
-          animate={{ x: dark ? 28 : 0 }}
+          animate={{ x: dark ? 32 : 0 }}
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
         >
           {dark ? (
