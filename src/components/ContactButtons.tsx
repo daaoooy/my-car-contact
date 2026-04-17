@@ -14,15 +14,24 @@ const ContactButtons = ({
 }: ContactButtonsProps) => {
   return (
     <div className="flex flex-col w-72 gap-2 mt-4">
-      <Button className="w-full gap-2 shadow-sm" onClick={onCall}>
+      <Button
+        className="w-full gap-2 shadow-sm py-5 bg-[#23201e] dark:bg-[#fff9e9] rounded-full"
+        onClick={onCall}
+      >
         <Phone size={18} /> 전화로 할래요
       </Button>
 
-      <Button className="w-full gap-2 shadow-sm" onClick={onMessage}>
+      <Button
+        className="w-full gap-2 shadow-sm py-5 bg-[#23201e] dark:bg-[#fff9e9] rounded-full"
+        onClick={onMessage}
+      >
         <Mail size={18} /> 메시지로 할래요
       </Button>
 
-      <Button className="w-full gap-2 shadow-sm" onClick={onKakao}>
+      <Button
+        className="w-full gap-2 shadow-sm py-5 bg-[#23201e] dark:bg-[#fff9e9] rounded-full"
+        onClick={onKakao}
+      >
         <MessageCircle size={18} /> 카톡으로 할래요
       </Button>
     </div>
