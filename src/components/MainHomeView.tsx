@@ -41,7 +41,7 @@ const MainHomeView = ({
         <img
           src={CasperDongGuImage}
           className={cn(
-            "w-50 h-50 md:w-70 md:h-70",
+            "w-60 h-60 md:w-70 md:h-70",
             shake ? "translate-y-[0.5px] md:translate-y-px" : "",
           )}
           alt="Car Owner"
